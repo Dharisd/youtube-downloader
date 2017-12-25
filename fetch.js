@@ -8,7 +8,7 @@ fetch(url, {
       "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
     },
     var param = {"url":"youtube.com"};
-    body: JSON.stringify(params)
+    body: params
   })
   .then(json)
   .then(function (data) {
