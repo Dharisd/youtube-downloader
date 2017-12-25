@@ -24,6 +24,13 @@ angular.module('webui.services.rpc.helpers', [
             }
           }
           else {
+            fetch("http://127.0.0.1:5000",{
+              method: 'POST',
+              headers: {'Content-Type':'application/x-www-form-urlencoded'},
+              body: 'url= ' + uri_element
+            })
+            console.log("sending links")
+
             uri_parsed.push(uri_element);
           }
         });
