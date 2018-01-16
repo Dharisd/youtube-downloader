@@ -1,0 +1,168 @@
+<html>
+    <head>
+        <script type=text/javascript src="{{url_for('static',filename='jquery.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                if (typeof Object.keys !== "function") {
+    (function() {
+        var hasOwn = Object.prototype.hasOwnProperty;
+        Object.keys = Object_keys;
+        function Object_keys(obj) {
+            var keys = [], name;
+            for (name in obj) {
+                if (hasOwn.call(obj, name)) {
+                    keys.push(name);
+                }
+            }
+            return keys;
+        }
+    })();
+}
+                
+    
+                
+                
+                $("#btn").click(function(){
+                    url = $("#data").val()
+                    console.log(url)
+                    if (data  != ""){
+                        //alert("data present"+ " " + data )
+                        
+                        fetch("http://127.0.0.1:5000/url",{
+                            method: 'POST',
+                            headers:{'Content-Type':'application/x-www-form-urlencoded',},
+                            body: 'url=' + url
+                            
+
+                        })//.then(json)
+                          .then(function(response){
+                              //console.log(response.text());
+                              return response.text();
+                              
+                          })
+                          .then(function(data){
+                              var formats = data;
+                              //console.log(data);
+                              format = JSON.parse(formats);
+                              link = Object.keys(format);
+                              var n = link.length
+                              
+                              //console.log(n);
+                              //$("#d1").html(format[0]);
+                              //$("#d1").show()
+                              $("#link").html(url);
+                              $("#link").show();
+
+                              
+                              for (i=0; i < n; i++ ){
+                                   var val = "#d" + i
+                                   console.log(link[i]);
+                                   $(val).html(link[i]);
+                                   $(val).show()
+
+                              }
+                              //$("#form")[0].reset();
+                              
+
+                          })
+                    }
+                    else{
+                        alert("data not present"+ data)
+                        
+                    }
+                })
+            })
+
+        </script>
+        <script>
+            function send(choice){
+                    choice = "#" + choice
+                    //var url = $("#data").val()
+                     var param = $(choice).html();
+                     urlv = format[param]
+                    
+                    fetch("http://127.0.0.1:5000/download",{
+                            method: 'POST',
+                            headers:{urlv,},
+                             
+                    }).then(function(response){
+                        return response.text();
+                    }).then(function(result){
+                        console.log(result);
+                        if (result == "success"){
+                            $("#result").html("download started");
+                            $("#result").show();
+                        }
+                        else{
+                            $("#result").html("the download could not be started due to error in download client")
+                            $("#result").show();
+                        }
+
+
+                    })
+                }
+                </script>
+
+
+        <form id="form" method="post">
+            <div id="inputtext" ><label>Enter download link</label>
+            <input type="text" name="data" id="data" placeholder="link"/>
+            <button  id="btn" type="button">submir</button>
+            <h1 id="link" hidden> link </h1>
+            </div>
+            <button  id="d0"  onClick="send(this.id)" hidden type="button">should be invisible</button>
+            <button  id="d1" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d2" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d3" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d4" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d5"  onClick="send(this.id)" hidden type="button">should be invisible</button>
+            <button  id="d6" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d7" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d8" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            <button  id="d9" hidden onClick="send(this.id)" type="button">should be invisible</button>
+            
+            <div>
+            <p1 id="result" hidden >result<p1>
+                </div>
+            
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
